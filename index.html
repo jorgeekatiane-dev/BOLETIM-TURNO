@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boletim de Turno ENAEX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>BOLETIM DE TURNO</h1>
+    <div class="topo">
+      <select id="turma"><option value="A">TURMA A</option><option value="C">TURMA C</option></select>
+      <input type="date" id="data">
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="abrirAba('caminhonete')">CAMINHONETES</button>
+      <button class="tab" onclick="abrirAba('caminhao')">CAMINHÕES</button>
+      <button class="tab" onclick="abrirAba('adiantamento')">ADIANTAMENTO</button>
+    </div>
+    <div id="caminhonete" class="aba active"></div>
+    <div id="caminhao" class="aba"></div>
+    <div id="adiantamento" class="aba">
+      <textarea id="morro1" placeholder="MORRO 1 - Qtd Furos"></textarea>
+      <textarea id="n4ece" placeholder="N4ECE - Qtd Furos"></textarea>
+      <label><input type="checkbox" id="planoFogo" checked> Todos os planos de fogo foram entregues</label>
+    </div>
+    <button class="btn-gerar" onclick="gerarRelatorio()">GERAR RELATÓRIO</button>
+    <textarea id="saida" readonly placeholder="Seu relatório vai aparecer aqui..."></textarea>
+    <button class="btn-copiar" onclick="copiar()">COPIAR E ENVIAR</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
