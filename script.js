@@ -51,7 +51,10 @@ function gerarRelatorio() {
   texto += `ADIANTAMENTO\n`;
   texto += `MORRO 1: ${document.getElementById('morro1').value}\n`;
   texto += `N4ECE: ${document.getElementById('n4ece').value}\n\n`;
-  
+  texto += `MORRO 1: ${document.getElementById('morro1').value}\n`;
+texto += `N4ECE: ${document.getElementById('n4ece').value}\n`;
+texto += `N3WCE: ${document.getElementById('n3wce').value}\n`;
+texto += `PIT: ${document.getElementById('pit').value}\n\n`;
   if(document.getElementById('planoFogo').checked) {
     texto += `*📋 Todos os planos de fogo foram entregues e assinados.*\n`;
   }
