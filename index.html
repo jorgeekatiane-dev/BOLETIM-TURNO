@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boletim Turno</title>
-  <style>
-    body { background: #121212; color: #fff; font-family: Arial; padding: 10px; }
-    h1 { text-align: center; color: #FFD700; }
-    .tabs { display: flex; gap: 5px; margin-bottom: 10px; }
-    .tab { flex: 1; padding
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boletim Turno</title>
+<style>body{background:#121212;color:#fff;font-family:Arial;padding:10px}h1{text-align:center;color:#FFD700}.tabs{display:flex;gap:5px;margin-bottom:10px}.tab{flex:1;padding:10px;background:#333;border:none;color:#fff;cursor:pointer;border-radius:5px}.tab.active{background:#FFD700;color:#000;font-weight:bold}.aba{display:none}.aba.active{display:block}.item{background:#1e1e1e;padding:10px;margin-bottom:8px;border-radius:8px}.item b{color:#FFD700}label{display:block;margin:5px 0;font-size:14px}input,select{width:100%;padding:8px;margin-top:3px;border-radius:5px;border:none;background:#2a2a2a;color:#fff}button{width:100%;padding:15px;background:#FFD700;color:#000;font-weight:bold;border:none;border-radius:8px;font-size:16px;cursor:pointer;margin-top:10px}textarea{width:100%;height:200px;background:#1e1e1e;color:#fff;border:1px solid #333;border-radius:8px;padding:10px;margin-top:10px}</style>
+</head>
+<body>
+<h1>BOLETIM DE TURNO</h1>
+<label>Turma:<select id="turma"><option>A</option><option>B</option><option>C</option><option>D</option></select></label>
+<label>Data:<input type="date" id="data"></label>
+<div class="tabs"><button class="tab active" onclick="abrirAba('caminhonete')">CAMINHONETES</button><button class="tab" onclick="abrirAba('caminhao')">CAMINHÕES</button><button class="tab" onclick="abrirAba('adiantamento')">QTD FUROS</button></div>
+<div class="aba active" id="caminhonete"></div>
+<div class="aba" id="caminhao"></div>
+<div class="aba" id="adiantamento"></div>
+<button onclick="gerarRelatorio()">GERAR RELATÓRIO</button>
+<button onclick="copiar()">COPIAR RELATÓRIO</button>
+<textarea id="saida" readonly></textarea>
+<script src="script.js"></script>
+</body>
+</html>
