@@ -1,8 +1,8 @@
 const caminhonetes = ['CB113','CB114','CB115','CB117','CB118','CB125','CB127','CB128','CB132','CB135','CB138','CB141','CB142','CB143'];
 const caminhoes = ['CB119','CB120','CB121','CB122','CB123','CB124','CB126','CB130','CB133','CB137','CB140','CB144'];
 
-// AQUI VOCÊ SÓ EDITA OS NOMES. COLOCA E TIRA O QUE QUISER
-const lugaresAdiantamento = ['MORRO 1', 'N4ECE', 'N3WCE', 'PIT'];
+// SÓ EDITA AQUI. COLOCA E TIRA PRIORIDADE
+const lugaresAdiantamento = ['PRIORIDADE 1', 'PRIORIDADE 2', 'PRIORIDADE 3', 'PRIORIDADE 4', 'PRIORIDADE 5'];
 
 function abrirAba(id) {
   document.querySelectorAll('.aba').forEach(a => a.classList.remove('active'));
@@ -39,53 +39,4 @@ function criarLista(containerId, lista) {
 function criarAdiantamento() {
   const container = document.getElementById('adiantamento-container');
   lugaresAdiantamento.forEach(lugar => {
-    const id = lugar.toLowerCase().replace(/\s/g, '');
-    container.innerHTML += `
-      <label>${lugar}:
-        <input type="text" id="${id}" placeholder="0">
-      </label>
-    `;
-  });
-}
-
-function gerarRelatorio() {
-  const turma = document.getElementById('turma').value;
-  const data = document.getElementById('data').value;
-  const dataFormatada = new Date(data).toLocaleDateString('pt-BR');
-  
-  let texto = `TROCA DE TURNO:\n\nBoa noite, Turma!\nTroca de turno 3×3 Turma (${turma})\n*${dataFormatada}*\n\n`;
-  
-  [...caminhonetes, ...caminhoes].forEach(cb => {
-    const disp = document.getElementById(`disp-${cb}`)?.value;
-    const abast = document.getElementById(`abast-${cb}`)?.value;
-    if(disp && abast) {
-      texto += `*🚛.${cb}* \n${abast} \n${disp}\n\n`;
-    }
-  });
-  
-  texto += `ADIANTAMENTO\n`;
-  lugaresAdiantamento.forEach(lugar => {
-    const id = lugar.toLowerCase().replace(/\s/g, '');
-    texto += `${lugar}: ${document.getElementById(id).value}\n`;
-  });
-  texto += `\n`;
-  
-  if(document.getElementById('planoFogo').checked) {
-    texto += `*📋 Todos os planos de fogo foram entregues e assinados.*\n`;
-  }
-  texto += `*UM ÓTIMO TURNO DE TRABALHO A TODOS*`;
-  
-  document.getElementById('saida').value = texto;
-}
-
-function copiar() {
-  const saida = document.getElementById('saida');
-  saida.select();
-  document.execCommand('copy');
-  alert('Relatório copiado!');
-}
-
-document.getElementById('data').valueAsDate = new Date();
-criarLista('caminhonete', caminhonetes);
-criarLista('caminhao', caminhoes);
-criarAdiantamento();
+    const id = lugar.toLower
