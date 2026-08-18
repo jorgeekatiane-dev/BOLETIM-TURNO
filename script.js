@@ -1,7 +1,7 @@
 const caminhonetes = ['CB113','CB114','CB115','CB117','CB118','CB125','CB127','CB128','CB132','CB135','CB138','CB141','CB142','CB143'];
 const caminhoes = ['CB119','CB120','CB121','CB122','CB123','CB124','CB126','CB130','CB133','CB137','CB140','CB144'];
 
-// SÓ EDITA AQUI. PODE COLOCAR 6, 8, 10 LUGARES
+// EDITA SÓ AQUI OS 6 LUGARES
 const lugaresFuros = ['PRIORIDADE 1', 'PRIORIDADE 2', 'PRIORIDADE 3', 'PRIORIDADE 4', 'PRIORIDADE 5', 'PRIORIDADE 6'];
 
 function abrirAba(id) {
@@ -37,13 +37,15 @@ function criarLista(containerId, lista) {
 }
 
 function criarFuros() {
-  const container = document.getElementById('furos-container');
+  const container = document.getElementById('adiantamento');
   lugaresFuros.forEach(lugar => {
     const id = lugar.toLowerCase().replace(/\s/g, '');
     container.innerHTML += `
-      <label>${lugar} - Qtd Furos:
-        <input type="number" id="${id}" placeholder="0">
-      </label>
+      <div class="item">
+        <label>${lugar} - Qtd Furos:
+          <input type="number" id="${id}" placeholder="0">
+        </label>
+      </div>
     `;
   });
 }
@@ -68,9 +70,7 @@ function gerarRelatorio() {
     const id = lugar.toLowerCase().replace(/\s/g, '');
     texto += `${lugar}: ${document.getElementById(id).value}\n`;
   });
-  texto += `\n`;
-  
-  texto += `*UM ÓTIMO TURNO DE TRABALHO A TODOS*`;
+  texto += `\n*UM ÓTIMO TURNO DE TRABALHO A TODOS*`;
   
   document.getElementById('saida').value = texto;
 }
