@@ -24,7 +24,13 @@
       <textarea id="morro1" placeholder="MORRO 1 - Qtd Furos"></textarea>
       <textarea id="n4ece" placeholder="N4ECE - Qtd Furos"></textarea>
       <label><input type="checkbox" id="planoFogo" checked> Todos os planos de fogo foram entregues</label>
-    </div>
+    </div><div class="item">
+  <b>ADIANTAMENTO</b>
+  <label>MORRO 1: <input type="text" id="morro1" placeholder="0"></label>
+  <label>N4ECE: <input type="text" id="n4ece" placeholder="0"></label>
+  <label>N3WCE: <input type="text" id="n3wce" placeholder="0"></label>
+  <label>PIT: <input type="text" id="pit" placeholder="0"></label>
+</div>
     <button class="btn-gerar" onclick="gerarRelatorio()">GERAR RELATÓRIO</button>
     <textarea id="saida" readonly placeholder="Seu relatório vai aparecer aqui..."></textarea>
     <button class="btn-copiar" onclick="copiar()">COPIAR E ENVIAR</button>
