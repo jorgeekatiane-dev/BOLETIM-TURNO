@@ -8,7 +8,7 @@
 body{background:#121212;color:#fff;font-family:Arial;padding:10px}
 h1{text-align:center;color:#FFD700}
 .tabs{display:flex;gap:5px;margin-bottom:10px}
-.tab{flex:1;padding:10px;background:#333;border:none;color:#fff;cursor:pointer;border-radius:5px;font-weight:bold}
+.tab{flex:1;padding:10px;background:#333;border:none;color:#fff;cursor:pointer;border-radius:5px;font-weight:bold;font-size:13px;white-space:nowrap} /* AJUSTE 1: fonte menor pra caber ADIANTAMENTO */
 .tab.active{background:#FFD700;color:#000}
 .aba{display:none}
 .aba.active{display:block}
@@ -45,10 +45,16 @@ function abrirAba(id){
   document.getElementById(id).classList.add('active');
   event.target.classList.add('active')
 }
-function criarLista(containerId,lista){
+function criarLista(containerId,lista,tipo){
   const container=document.getElementById(containerId);
   lista.forEach(cb=>{
-    container.innerHTML+=`<div class="item"><b>${cb}</b><label>Disponibilidade:<select id="disp-${cb}"><option>Apto ✅</option><option>Indisponível ❌</option><option>Manutenção</option></select></label><label>Abastecimento:<select id="abast-${cb}"><option>Abastecido por completo</option><option>Falta abastecer</option><option>Falta completar</option></select></label></div>`
+    if(tipo === 'caminhonete'){
+      // AJUSTE 2 E 3: Ícone caminhonete e só Disponibilidade
+      container.innerHTML+=`<div class="item"><b>🚙.${cb}</b><label>Disponibilidade:<select id="disp-${cb}"><option>Apto ✅</option><option>Indisponível ❌</option><option>Manutenção</option></select></label></div>`
+    } else {
+      // Caminhão continua igual
+      container.innerHTML+=`<div class="item"><b>🚛.${cb}</b><label>Disponibilidade:<select id="disp-${cb}"><option>Apto ✅</option><option>Indisponível ❌</option><option>Manutenção</option></select></label><label>Abastecimento:<select id="abast-${cb}"><option>Abastecido por completo</option><option>Falta abastecer</option><option>Falta completar</option></select></label></div>`
+    }
   })
 }
 function criarFuros(){
@@ -63,29 +69,11 @@ function gerarRelatorio(){
   const data=document.getElementById('data').value;
   const dataFormatada=new Date(data).toLocaleDateString('pt-BR');
   let texto=`TROCA DE TURNO:\n\nBoa noite, Turma!\nTroca de turno 3×3 Turma (${turma})\n*${dataFormatada}*\n\n`;
-  [...caminhonetes,...caminhoes].forEach(cb=>{
+  
+  // Caminhonetes - só disponibilidade
+  caminhonetes.forEach(cb=>{
     const disp=document.getElementById(`disp-${cb}`)?.value;
-    const abast=document.getElementById(`abast-${cb}`)?.value;
-    if(disp&&abast){texto+=`*🚛.${cb}* \n${abast} \n${disp}\n\n`}
+    if(disp){texto+=`*🚙.${cb}* \n${disp}\n\n`}
   });
-  texto+=`ADIANTAMENTO\n`;
-  lugaresFuros.forEach(lugar=>{
-    const id=lugar.toLowerCase().replace(/\s/g,'');
-    texto+=`${lugar}: ${document.getElementById(id).value}\n`
-  });
-  texto+=`\n*UM ÓTIMO TURNO DE TRABALHO A TODOS*`;
-  document.getElementById('saida').value=texto
-}
-function copiar(){
-  const saida=document.getElementById('saida');
-  saida.select();
-  document.execCommand('copy');
-  alert('Relatório copiado!')
-}
-document.getElementById('data').valueAsDate=new Date();
-criarLista('caminhonete',caminhonetes);
-criarLista('caminhao',caminhoes);
-criarFuros();
-</script>
-</body>
-</html>
+
+  // Caminhões - disponibilidade +
