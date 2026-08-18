@@ -1,6 +1,9 @@
 const caminhonetes = ['CB113','CB114','CB115','CB117','CB118','CB125','CB127','CB128','CB132','CB135','CB138','CB141','CB142','CB143'];
 const caminhoes = ['CB119','CB120','CB121','CB122','CB123','CB124','CB126','CB130','CB133','CB137','CB140','CB144'];
 
+// AQUI VOCÊ SÓ EDITA OS NOMES. COLOCA E TIRA O QUE QUISER
+const lugaresAdiantamento = ['MORRO 1', 'N4ECE', 'N3WCE', 'PIT'];
+
 function abrirAba(id) {
   document.querySelectorAll('.aba').forEach(a => a.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -33,6 +36,18 @@ function criarLista(containerId, lista) {
   });
 }
 
+function criarAdiantamento() {
+  const container = document.getElementById('adiantamento-container');
+  lugaresAdiantamento.forEach(lugar => {
+    const id = lugar.toLowerCase().replace(/\s/g, '');
+    container.innerHTML += `
+      <label>${lugar}:
+        <input type="text" id="${id}" placeholder="0">
+      </label>
+    `;
+  });
+}
+
 function gerarRelatorio() {
   const turma = document.getElementById('turma').value;
   const data = document.getElementById('data').value;
@@ -49,12 +64,12 @@ function gerarRelatorio() {
   });
   
   texto += `ADIANTAMENTO\n`;
-  texto += `MORRO 1: ${document.getElementById('morro1').value}\n`;
-  texto += `N4ECE: ${document.getElementById('n4ece').value}\n\n`;
-  texto += `MORRO 1: ${document.getElementById('morro1').value}\n`;
-texto += `N4ECE: ${document.getElementById('n4ece').value}\n`;
-texto += `N3WCE: ${document.getElementById('n3wce').value}\n`;
-texto += `PIT: ${document.getElementById('pit').value}\n\n`;
+  lugaresAdiantamento.forEach(lugar => {
+    const id = lugar.toLowerCase().replace(/\s/g, '');
+    texto += `${lugar}: ${document.getElementById(id).value}\n`;
+  });
+  texto += `\n`;
+  
   if(document.getElementById('planoFogo').checked) {
     texto += `*📋 Todos os planos de fogo foram entregues e assinados.*\n`;
   }
@@ -73,3 +88,4 @@ function copiar() {
 document.getElementById('data').valueAsDate = new Date();
 criarLista('caminhonete', caminhonetes);
 criarLista('caminhao', caminhoes);
+criarAdiantamento();
